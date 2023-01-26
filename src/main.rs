@@ -26,7 +26,7 @@ fn main() {
     if cli.only_result{
         let mut str = format!("Searching for `{}`, in `{}`", config.pattern, config.filename);
         if config.case_sensitive {
-            str.push_str(" with case sensitivity")
+            str.push_str(" with case insensitivity")
         }
 
         println!("{} \n", str.italic().bright_black());

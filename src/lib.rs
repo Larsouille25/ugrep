@@ -4,7 +4,7 @@ use std::error::Error;
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;
 
-    let results = if config.case_sensitive {
+    let results = if config.case_sensitive == false {
         search(&config.pattern, &contents)
     }else {
         search_case_insensitive(&config.pattern, &contents)
