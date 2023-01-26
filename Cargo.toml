@@ -13,3 +13,4 @@ license = "MIT"
 
 [dependencies]
 clap = { version = "4.1.4", features = ["derive"] }
+colored = "2.0.0"
