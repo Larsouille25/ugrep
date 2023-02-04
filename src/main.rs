@@ -23,15 +23,17 @@ fn main() {
     let cli = Cli::parse();
     let config = Config::new(cli.pattern, cli.path, cli.case_sensitive);
 
-    if cli.only_result{
-        let mut str = format!("Searching for `{}`, in `{}`", config.pattern, config.filename);
+    if cli.only_result {
+        let mut str = format!(
+            "Searching for `{}`, in `{}`",
+            config.pattern, config.filename
+        );
         if config.case_sensitive {
             str.push_str(" with case insensitivity")
         }
 
         println!("{} \n", str.italic().bright_black());
     }
-
 
     if let Err(e) = ugrep::run(config) {
         eprintln!("Application error: {e}");

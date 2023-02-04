@@ -1,12 +1,12 @@
-use std::fs;
 use std::error::Error;
+use std::fs;
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;
 
-    let results = if config.case_sensitive == false {
+    let results = if !config.case_sensitive{
         search(&config.pattern, &contents)
-    }else {
+    } else {
         search_case_insensitive(&config.pattern, &contents)
     };
 
@@ -24,8 +24,12 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(pattern: String, filename: String , case_sensitive: bool) -> Config {
-        Config { pattern, filename, case_sensitive }
+    pub fn new(pattern: String, filename: String, case_sensitive: bool) -> Config {
+        Config {
+            pattern,
+            filename,
+            case_sensitive,
+        }
     }
 }
 
@@ -48,13 +52,12 @@ pub fn search_case_insensitive<'a>(pattern: &str, contents: &'a str) -> Vec<&'a 
     results
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn case_sensitive(){
+    fn case_sensitive() {
         let pattern = "duct";
         let contents = "
 Rust:
@@ -66,7 +69,7 @@ Duct tape";
     }
 
     #[test]
-    fn case_insensitive(){
+    fn case_insensitive() {
         let pattern = "rUsT";
         let contents = "
 Rust:
